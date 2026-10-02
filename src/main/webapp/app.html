@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sunrise Dental Clinic</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h2>Sunrise Dental Clinic</h2>
+        <div><span id="who"></span> <button class="link" onclick="exitSystem()">Exit / Logout</button></div>
+    </header>
+
+    <nav>
+        <button onclick="show('register')">Register Appointment</button>
+        <button onclick="show('search')">Display Appointment</button>
+        <button onclick="show('bill')">Calculate &amp; Print Bill</button>
+        <button onclick="show('report')">Reports</button>
+        <button onclick="show('help')">Help</button>
+    </nav>
+
+    <main>
+        <div id="msg" class="msg"></div>
+
+        <!-- 2. Register New Appointment -->
+        <section id="register" class="card">
+            <h3>Register New Appointment</h3>
+            <div class="grid">
+                <div><label>Patient Name *</label><input id="pName"></div>
+                <div><label>Contact Number * (10 digits)</label><input id="pContact" maxlength="10"></div>
+                <div class="full"><label>Address *</label><input id="pAddress"></div>
+                <div><label>Dentist *</label><select id="dentist"></select></div>
+                <div><label>Treatment *</label><select id="treatment"></select></div>
+                <div><label>Date *</label><input id="aDate" type="date"></div>
+                <div><label>Time * (08:00 - 17:00)</label><input id="aTime" type="time"></div>
+            </div>
+            <button onclick="registerAppointment()">Register Appointment</button>
+        </section>
+
+        <!-- 3. Display Appointment Details -->
+        <section id="search" class="card hidden">
+            <h3>Display Appointment Details</h3>
+            <label>Appointment Number</label>
+            <input id="searchNo" placeholder="e.g. APT-1A2B3C4D">
+            <button onclick="searchAppointment()">Search</button>
+            <div id="searchResult"></div>
+        </section>
+
+        <!-- 4. Calculate and Print Bill -->
+        <section id="bill" class="card hidden">
+            <h3>Calculate &amp; Print Bill</h3>
+            <label>Appointment Number</label>
+            <input id="billNo" placeholder="e.g. APT-1A2B3C4D">
+            <button onclick="makeBill()">Calculate Bill</button>
+            <div id="receipt"></div>
+        </section>
+
+        <!-- Reports (extra value) -->
+        <section id="report" class="card hidden">
+            <h3>Reports: All Appointments</h3>
+            <button onclick="loadReport()">Refresh</button>
+            <div id="reportTable"></div>
+        </section>
+
+        <!-- 5. Help -->
+        <section id="help" class="card hidden">
+            <h3>Help: How to Use the System</h3>
+            <ol>
+                <li><b>Register Appointment:</b> fill in all fields marked *, then click Register. Note the appointment number shown.</li>
+                <li><b>Display Appointment:</b> enter the appointment number and click Search to see patient and appointment details.</li>
+                <li><b>Calculate &amp; Print Bill:</b> enter the appointment number, click Calculate Bill, then Print Receipt.</li>
+                <li><b>Reports:</b> view a list of all appointments.</li>
+                <li><b>Exit / Logout:</b> always log out when you finish to keep patient data secure.</li>
+            </ol>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

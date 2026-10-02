@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sunrise Dental Clinic - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="center">
+    <div class="card login-card">
+        <h1>Sunrise Dental Clinic</h1>
+        <p class="muted">Staff Login</p>
+        <div id="msg" class="msg"></div>
+        <label>Username</label>
+        <input id="username" type="text" autocomplete="username">
+        <label>Password</label>
+        <input id="password" type="password" autocomplete="current-password">
+        <button id="loginBtn">Login</button>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        const msg = document.getElementById('msg');
+
+        async function doLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                msg.textContent = 'Please enter both username and password.';
+                msg.className = 'msg error';
+                return;
+            }
+            try {
+                const staff = await Api.login(username, password);
+                sessionStorage.setItem('staff', JSON.stringify(staff));
+                window.location.href = 'app.html';
+            } catch (e) {
+                msg.textContent = 'Invalid username or password.';
+                msg.className = 'msg error';
+            }
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', doLogin);
+        document.getElementById('password').addEventListener('keydown', e => {
+            if (e.key === 'Enter') doLogin();
+        });
+    </script>
+</body>
+</html>
